@@ -1,3 +1,4 @@
+//AsyncHandler is used to handle all promises returned
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -6,12 +7,13 @@ const User = require('../models/userModule');
 
 //@desc     Register new user
 //@route    /api/users
+//@access   public
 //@method   POST
 const register = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   if (!firstName || !lastName || !email || !password) {
-    return res.status(400).json({ msg: 'Please fill in all text' });
+    return res.status(400).json({ msg: 'Please fill all fields' });
   }
 
   const userExists = await User.findOne({ email });
@@ -29,6 +31,9 @@ const register = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
   });
+  if (!user) {
+    return res.status(400).json({ msg: 'Invalid credentials' });
+  }
   res.status(200).json({
     firstName: user.firstName,
     lastName: user.lastName,
@@ -37,12 +42,41 @@ const register = asyncHandler(async (req, res) => {
   });
 });
 
+//@desc     Log user in
+//@route    /api/users/login
+//@access   public
+//method    POST
 const login = asyncHandler(async (req, res) => {
-  res.status(200).json({ msg: 'Log a user ' });
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ msg: 'Please add email and password' });
+  }
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res
+      .status(404)
+      .json({ msg: 'Email does not exist, please create an account' });
+  }
+  //Takes in the password user entered and compare it with the old password
+  if (!(await bcrypt.compare(password, user.password))) {
+    return res.status(400).json({ msg: 'Incorrect Password' });
+  }
+  if (user && (await bcrypt.compare(password, user.password))) {
+    return res.status(200).json({
+      msg: 'You logged in successfully',
+      name: user.name,
+      id: user._id,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  }
 });
 
 const getMe = asyncHandler(async (req, res) => {
-  res.status(200).json({ msg: `Welcome ${req.params.me}` });
+  res.status(200).json(req.user);
 });
 
 // Generate a token in order to authorize users whenever they log in
