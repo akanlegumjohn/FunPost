@@ -12,4 +12,6 @@ app.use(express.json());
 // connectToDb();
 
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/posts', require('./routes/postRoutes'));
+
 app.listen(port, () => console.log(`listening to port ${port}...`.yellow.bold));
