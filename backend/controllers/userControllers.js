@@ -67,10 +67,12 @@ const login = asyncHandler(async (req, res) => {
   if (user && (await bcrypt.compare(password, user.password))) {
     return res.status(200).json({
       msg: 'You logged in successfully',
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       id: user._id,
       email: user.email,
       token: generateToken(user._id),
+      createdAt: user.createdAt,
     });
   }
 });
