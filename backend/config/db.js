@@ -8,7 +8,7 @@ const connectToDb = async () => {
     );
   } catch (error) {
     console.log(error);
-    //Terminate the process if there is a fata exception not handled
+    //Terminate the process if there is a fatal exception not handled
     process.exit(1);
   }
 };

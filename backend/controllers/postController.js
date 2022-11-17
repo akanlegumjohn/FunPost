@@ -1,16 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const { findByIdAndUpdate } = require('../models/postModel');
 
 const Post = require('../models/postModel');
-
-//@desc     get all posts
-//@access   public
-//@route    /api/posts
-//@method   get
-const getPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find();
-  res.status(200).json(posts);
-});
 
 //@desc     create new post
 //@access   private
@@ -28,13 +18,22 @@ const createPost = asyncHandler(async (req, res) => {
   res.status(200).json(post);
 });
 
-//@desc     get all posts
+//@desc     get only a user's post
 //@access   private
-//@route    /api/posts/:me
+//@route    /api/posts/me
 //@method   get
 const getMyPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find({ user: req.user.id });
 
+  res.status(200).json(posts);
+});
+
+//@desc     get all posts
+//@access   public
+//@route    /api/posts
+//@method   get
+const getPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find();
   res.status(200).json(posts);
 });
 
@@ -57,11 +56,9 @@ const updatePost = asyncHandler(async (req, res) => {
   if (post.user.toString() !== req.user.id) {
     return res.status(400).json({ msg: 'You are not authorized' });
   }
-  const updatedPost = await Post.findByIdAndUpdate(
-    req.params.id,
-    { text },
-    { new: true }
-  );
+  const updatedPost = await Post.findByIdAndUpdate(req.params.id, text, {
+    new: true,
+  });
 
   res.status(200).json(updatedPost);
 });
@@ -86,4 +83,38 @@ const deletePost = asyncHandler(async (req, res) => {
   res.status(200).json(deletedPost);
 });
 
-module.exports = { getMyPosts, getPosts, deletePost, updatePost, createPost };
+//@desc     increment likes
+//@access   private
+//@route    /api/posts/like
+//@method   post
+const incrementLikes = asyncHandler(async (req, res) => {
+  const post = await Post.findByIdAndUpdate(
+    req.params.id,
+    { $inc: { likes: 1 } },
+    { new: true }
+  );
+  res.status(200).json(post);
+});
+
+//@desc     decrement likes
+//@access   private
+//@route    /api/posts/unlike
+//@method   post
+const decrementLikes = asyncHandler(async (req, res) => {
+  const post = await Post.findByIdAndUpdate(
+    req.params.id,
+    { $inc: { dislikes: 1 } },
+    { new: true }
+  );
+  res.status(200).json(post);
+});
+
+module.exports = {
+  getMyPosts,
+  getPosts,
+  deletePost,
+  updatePost,
+  createPost,
+  incrementLikes,
+  decrementLikes,
+};
