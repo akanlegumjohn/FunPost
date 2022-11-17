@@ -13,10 +13,12 @@ const protect = asyncHandler(async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
 
+      //decode is the payload returned from jwt
       const decode = jwt.verify(token, process.env.JWT_SECRET);
-      console.log('decode', decode);
-      console.log('token', token);
+
+      //req.user represents the user that had just logged in and that can be used to access protected routes
       req.user = await User.findById(decode.id).select('-password');
+      console.log(req.user);
       next();
     } catch (error) {
       res.status(401).send('You are not authorized');
