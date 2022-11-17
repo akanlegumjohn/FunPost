@@ -1,10 +1,17 @@
 const asyncHandler = require('express-async-handler');
 
+const Post = require('../models/postModel');
+
 //@desc     create new post
 //@access   private
 //@route    /api/posts
 //@method   post
 const createPost = asyncHandler(async (req, res) => {
+  const {text} = req.body
+  if(!text){
+    res.status(400).json({msg:'Please add text'})
+  }
+  const post = await Post.create({text})
   res.status(200).json({ msg: 'Created a post' });
 });
 
