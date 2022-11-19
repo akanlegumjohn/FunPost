@@ -1,12 +1,15 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   DisplayPassword,
   passwordChecker,
   passwordStrengthChecker,
 } from '../utils/verifyPassword';
+import { reset, register } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -17,9 +20,27 @@ const Register = () => {
     confirmPassword: '',
   });
 
+  //Handles view and hide passwords in the forms
   const [showPassword, setShowPassword] = useState(false);
 
   const { firstName, lastName, email, password, confirmPassword } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isLoading, isError, message, isSuccess } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess || user) {
+      navigate('/');
+    }
+    dispatch(reset());
+  }, [user, isError, message, isSuccess, navigate, dispatch]);
 
   const handleInput = (e) => {
     setFormData((prevFormData) => ({
@@ -27,6 +48,7 @@ const Register = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (passwordChecker(password) === false) {
@@ -36,8 +58,21 @@ const Register = () => {
     }
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
+    } else {
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+      };
+      dispatch(register(userData));
     }
   };
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <section className="form--heading">

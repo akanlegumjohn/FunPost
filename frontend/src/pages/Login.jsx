@@ -1,6 +1,11 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { DisplayPassword } from '../utils/verifyPassword';
+import { reset, login } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +16,22 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { email, password } = formData;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isLoading, isError, message, isSuccess } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess || user) {
+      navigate('/');
+    }
+    dispatch(reset());
+  }, [user, isError, message, isSuccess, navigate, dispatch]);
 
   const handleInput = (e) => {
     setFormData((prevFormData) => ({
@@ -20,8 +41,11 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    dispatch(login({ email, password }));
   };
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <>
       <section className="form--heading">
