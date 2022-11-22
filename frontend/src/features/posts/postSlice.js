@@ -12,7 +12,7 @@ const initialState = {
 
 //Create a new post
 export const createPost = createAsyncThunk(
-  'post/createPost',
+  'posts/create',
   async (postData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -32,7 +32,7 @@ export const createPost = createAsyncThunk(
 
 //Get all posts even if you are not logged in
 export const getAllPosts = createAsyncThunk(
-  'post/getAllPosts',
+  'posts/getAllPosts',
   async (_, thunkAPI) => {
     try {
       return await postService.getAllPosts();
@@ -50,7 +50,7 @@ export const getAllPosts = createAsyncThunk(
 
 //Get only the posts created by me
 export const getMyPosts = createAsyncThunk(
-  'post/getMyPosts',
+  'posts/getMyPosts',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -69,7 +69,7 @@ export const getMyPosts = createAsyncThunk(
 
 //Delete a post created by me
 export const deletePost = createAsyncThunk(
-  'post/deletePost',
+  'post/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -95,6 +95,7 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
       state.message = '';
+      state.posts = [];
     },
   },
   //Handles the pending, fulfilled and rejected phases when http requests are made
@@ -123,6 +124,7 @@ export const postSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
+        console.log(action.payload);
         state.posts = action.payload;
       })
       .addCase(getAllPosts.rejected, (state, action) => {
