@@ -6,7 +6,7 @@ const {
   deletePost,
   createPost,
   incrementLikes,
-  decrementLikes,
+  incrementDislikes,
 } = require('../controllers/postController');
 const { protect } = require('../middlewares/authMiddleware');
 
@@ -17,7 +17,7 @@ router.get('/', getPosts);
 router.get('/me', protect, getMyPosts);
 router.put('/:id', protect, updatePost);
 router.delete('/:id', protect, deletePost);
-router.post('/like/:id', protect, incrementLikes);
-router.post('/dislike/:id', protect, decrementLikes);
+router.patch('/like/:id', incrementLikes);
+router.patch('/dislike/:id', incrementDislikes);
 
 module.exports = router;

@@ -7,7 +7,7 @@ import { getMyPosts, reset } from '../features/posts/postSlice';
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const { posts } = useSelector((state) => state.post);
+  const { myPosts } = useSelector((state) => state.post);
 
   useEffect(() => {
     dispatch(getMyPosts());
@@ -17,8 +17,8 @@ const Dashboard = () => {
   }, [dispatch]);
   return (
     <section>
-      {posts.length > 0 ? (
-        <PostContainer posts={posts} />
+      {myPosts.length > 0 ? (
+        <PostContainer posts={myPosts} />
       ) : (
         <h4>There are no posts</h4>
       )}

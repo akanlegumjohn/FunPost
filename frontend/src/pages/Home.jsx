@@ -13,23 +13,28 @@ const Home = () => {
   const { posts, isLoading } = useSelector((state) => state.post);
 
   useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
     dispatch(getAllPosts());
     return () => dispatch(reset());
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, user]);
 
   if (isLoading) {
     return <Spinner />;
   }
   return (
-    <div>
+    <>
       {user && <PostForm />}
-      {posts.length > 0 ? (
-        <PostContainer posts={posts} />
-      ) : (
-        <h4>There are no posts</h4>
-      )}
-      <hr />
-    </div>
+      <main className="main">
+        {posts.length > 0 ? (
+          <PostContainer posts={posts} />
+        ) : (
+          <h4>There are no posts</h4>
+        )}
+        <hr />
+      </main>
+    </>
   );
 };
 

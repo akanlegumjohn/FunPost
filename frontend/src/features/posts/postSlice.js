@@ -4,6 +4,7 @@ import postService from './postService';
 
 const initialState = {
   posts: [],
+  myPosts: [],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -86,6 +87,25 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+//Like a post
+export const postLike = createAsyncThunk(
+  ('post/like',
+  async (id, thunkAPI) => {
+    try {
+      console.log('id', id);
+      return await postService.postLike(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  })
+);
+
 export const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -96,6 +116,7 @@ export const postSlice = createSlice({
       state.isSuccess = false;
       state.message = '';
       state.posts = [];
+      state.myPosts = [];
     },
   },
   //Handles the pending, fulfilled and rejected phases when http requests are made
@@ -109,7 +130,7 @@ export const postSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.posts.push(action.payload);
+        state.myPosts.push(action.payload);
       })
       .addCase(createPost.rejected, (state, action) => {
         state.isLoading = false;
@@ -124,7 +145,6 @@ export const postSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
         state.posts = action.payload;
       })
       .addCase(getAllPosts.rejected, (state, action) => {
@@ -140,7 +160,7 @@ export const postSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.posts = action.payload;
+        state.myPosts = action.payload;
       })
       .addCase(getMyPosts.rejected, (state, action) => {
         state.isLoading = false;
@@ -155,14 +175,32 @@ export const postSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log('Testing delete', action.payload);
-        state.posts = state.posts.filter(
+        state.myPosts = state.myPosts.filter(
           (post) => post._id !== action.payload.id
         );
       })
       .addCase(deletePost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(postLike.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(postLike.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.posts = state.posts.find(
+          (post) => post._id === action.payload.id
+        );
+
+        console.log(action.payload);
+      })
+      .addCase(postLike.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        console.log(action.payload);
         state.message = action.payload;
       });
   },

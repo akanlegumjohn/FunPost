@@ -1,5 +1,6 @@
 :root {
-  --dim_white_color: #f3f5f8;
+  --background_color: rgba(24, 115, 231, 0.1);
+  --white_color: #ffffff;
   --dark_gray_color: #3d535f;
   --violet_color: #7f00ff;
   --inactive_color: #b3ddff;
@@ -7,19 +8,25 @@
   --title_color: #1873e7;
   --black--color: #000;
   --links--color: #0c47cb;
+  --avatar_color_1: #ffd37e;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+/* General styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* will have to add min-zoom and max-zoom to the app */
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
+  background: var(--background_color);
 }
 
 a {
@@ -45,50 +52,110 @@ h3 {
   font-weight: 600;
   margin-bottom: 10px;
 }
+/* End of general styles */
 
-.post--container {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* Logo styles */
+.logo {
+  font-family: 'Redressed';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 47px;
   text-align: center;
+  color: var(--title_color);
 }
 
-.header {
+/* Avatar styles */
+.avatar--container {
+  background: var(--avatar_color_1);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-left: 20px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+}
+.avatar--container span {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 47px;
+  margin-top: 10px;
+  color: var(--white_color);
+}
+
+/* Beginning of Navigation bar styles */
+.nav {
+  box-sizing: border-box;
+  position: fixed;
+  width: 295px;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: var(--white_color);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 50px;
   padding: 20px 0;
   border-bottom: 1px solid var(--active_color);
-  margin-bottom: 60px;
 }
 
-.header ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.nav a {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 33px;
+  text-align: center;
+  color: #3c464c;
 }
 
-.header ul li {
-  margin-right: 20px;
-}
-
-.header ul li a {
-  display: flex;
-  align-items: center;
-}
-
-.header ul li a:hover {
+.nav ul li a:hover {
   color: var(--inactive_color);
 }
 
-.header ul li a svg {
-  margin-right: 5px;
+.profile--details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.profile--details div {
+  width: 140px;
+  height: 140px;
+  border-radius: 70px;
+  margin-left: -5px;
+}
+.profile--details span {
+  margin-top: 50px;
+  font-weight: 500;
+  font-size: 50px;
 }
 
-.logo {
-  padding-left: 10px;
+.profile--details p {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  color: #3c464c;
 }
+/* End of navigation styles  */
+
+/* Main content styles */
+.main {
+  position: absolute;
+  left: 303px;
+  width: 70%;
+  height: auto;
+  top: 277px;
+  background: var(--white_color);
+}
+
+/* Register and log in form styles*/
 .form--heading {
   font-size: 2rem;
   font-weight: 700;
@@ -104,30 +171,7 @@ h3 {
   color: var(--black--color);
 }
 
-.posts {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.post {
-  background-color: #f4f4f4;
-  margin: 10px 0;
-  padding: 20px 0 10px;
-  position: relative;
-}
-
-.post .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-.form,
-.posts--content {
+.form {
   width: 70%;
   margin: 0 auto;
 }
@@ -136,9 +180,7 @@ h3 {
   margin-bottom: 10px;
 }
 
-.form--group input,
-.form--group textarea,
-.form--group select {
+.form--group input {
   width: 100%;
   padding: 10px;
   border: 2px solid var(--inactive_color);
@@ -160,17 +202,6 @@ p {
   color: var(--links--color);
   font-size: 20px;
   font-weight: 700;
-}
-.post--form {
-  display: flex;
-  align-items: flex-start;
-  width: 30%;
-  margin: 0 auto;
-  float: left;
-  padding-left: 20px;
-}
-.form--group textarea {
-  font-size: 20px;
 }
 .btn {
   padding: 10px 20px;
@@ -195,6 +226,41 @@ p {
   background-color: var(--inactive_color);
   color: var(--dark_gray_color);
 }
+
+.active--btn:hover {
+  transform: scale(0.98);
+}
+/* End of register and log in form styles */
+
+/* Post form style */
+.post--form--container {
+  position: absolute;
+  width: 70%;
+  padding: 20px;
+  height: 251px;
+  left: 303px;
+  top: 10px;
+  background: var(--white_color);
+  margin: 0 auto;
+}
+.post--form {
+  display: flex;
+}
+
+.post--form textarea {
+  font-size: 20px;
+  width: 300%;
+  min-height: 140px;
+  max-height: 150px;
+  min-width: 690px;
+  max-width: 690px;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0px 0px 20px 10px;
+  font-family: inherit;
+  border: none;
+}
+
 .post--btn {
   background-color: var(--links--color);
   color: var(--black--color);
@@ -203,22 +269,49 @@ p {
   appearance: button;
   width: 20%;
   float: right;
-  margin-top: -20px;
+  margin-right: 30px;
+}
+.ff {
+  background-color: red;
 }
 
-/* .btn svg {
-  margin-right: 8px;
-} */
-
-/* .btn--reverse {
-  background: #fff;
-  color: #000;
-} */
-
-.active--btn:hover {
-  transform: scale(0.98);
+/* Post styles */
+.posts--content {
+  width: 70%;
+  margin: 0 auto;
+}
+.post--container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.posts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
+.post {
+  background-color: #f4f4f4;
+  margin: 10px 0;
+  padding: 20px 0 10px;
+  position: relative;
+}
+
+.post .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* End of post styles */
+
+/* Password validity styles */
 .stable-password {
   font-family: monospace;
   color: green;
@@ -231,12 +324,14 @@ p {
 
 .view-password {
   background-color: var(--black--color);
-  color: var(--dim_white_color);
+  color: var(--white_color);
   cursor: pointer;
   border-radius: 1px;
   padding: 4px;
 }
+/* End of password validity styles */
 
+/* Loading spinner styles */
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;

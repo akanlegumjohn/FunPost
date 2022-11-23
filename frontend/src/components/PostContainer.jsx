@@ -4,8 +4,8 @@ const PostContainer = ({ posts }) => {
   return (
     <section className="posts--content">
       {posts.map((post) => (
-        <div className="posts">
-          <Post key={posts._id} post={post} />
+        <div className="posts" key={post._id}>
+          <Post post={post} />
         </div>
       ))}
     </section>

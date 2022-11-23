@@ -85,7 +85,7 @@ const deletePost = asyncHandler(async (req, res) => {
 
 //@desc     increment likes
 //@access   private
-//@route    /api/posts/like
+//@route    /api/posts/like/:id
 //@method   post
 const incrementLikes = asyncHandler(async (req, res) => {
   const post = await Post.findByIdAndUpdate(
@@ -96,11 +96,11 @@ const incrementLikes = asyncHandler(async (req, res) => {
   res.status(200).json(post);
 });
 
-//@desc     decrement likes
+//@desc     increment dislikes
 //@access   private
-//@route    /api/posts/unlike
+//@route    /api/posts/dislike/:id
 //@method   post
-const decrementLikes = asyncHandler(async (req, res) => {
+const incrementDislikes = asyncHandler(async (req, res) => {
   const post = await Post.findByIdAndUpdate(
     req.params.id,
     { $inc: { dislikes: 1 } },
@@ -116,5 +116,5 @@ module.exports = {
   updatePost,
   createPost,
   incrementLikes,
-  decrementLikes,
+  incrementDislikes,
 };

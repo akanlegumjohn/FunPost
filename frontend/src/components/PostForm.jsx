@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createPost } from '../features/posts/postSlice';
+import Avatar from './Avatar';
 
 const PostForm = () => {
   const [text, setText] = useState('');
@@ -18,18 +19,23 @@ const PostForm = () => {
     }
   };
   return (
-    <section className="post--form">
+    <section className="post--form--container">
       <form onSubmit={handleSubmit}>
-        <div className="form--group">
-          <textarea
-            cols="30"
-            rows="5"
-            onChange={(e) => setText(e.target.value)}
-          >
-            What are you thinking about...
-          </textarea>
+        <div className="post--form">
+          <div className="post--form--avatar">
+            <Avatar />
+          </div>
+          <div>
+            <textarea
+              type="text"
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Post what is on your mind..."
+            />
+          </div>
         </div>
-        <button className="btn post--btn">post</button>
+        <div>
+          <button className="btn post--btn">post</button>
+        </div>
       </form>
     </section>
   );

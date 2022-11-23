@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaUser, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaSignOutAlt } from 'react-icons/fa';
 import { reset, logout } from '../features/auth/authSlice';
+import Avatar from './Avatar';
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -10,47 +11,32 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    navigate('/');
+    navigate('/login');
   };
   return (
-    <header className="header">
-      <div className="logo">FunPost</div>
-      <ul>
-        {user ? (
-          <>
-            <li>
-              <Link to="/">Feed</Link>
-            </li>
-            <li>
-              <Link to="/dasboard">dashboard</Link>
-            </li>
-            <p>
-              <FaUser /> Welcome {user.firstName}
-            </p>
-            <button className="btn" onClick={handleLogout}>
-              <FaSignOutAlt />
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link to="/login">
-                <FaSignInAlt />
-                Login
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/register">
-                <FaUser />
-                Register
-              </Link>
-            </li>
-          </>
-        )}
-      </ul>
-    </header>
+    user && (
+      <nav className="nav">
+        <div className="logo">FunPost</div>
+        <>
+          <div className="profile--details">
+            <div>
+              <Avatar />
+            </div>
+            <p>15K Followers 950 Following</p>
+          </div>
+          <div>
+            <Link to="/">Feed</Link>
+          </div>
+          <div>
+            <Link to="/profile">Profile</Link>
+          </div>
+          <button className="btn" onClick={handleLogout}>
+            <FaSignOutAlt />
+            Logout
+          </button>
+        </>
+      </nav>
+    )
   );
 };
 
