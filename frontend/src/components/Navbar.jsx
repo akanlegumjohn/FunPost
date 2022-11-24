@@ -1,8 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaSignOutAlt } from 'react-icons/fa';
+
+// import { FaSignOutAlt } from 'react-icons/fa';
 import { reset, logout } from '../features/auth/authSlice';
 import Avatar from './Avatar';
+import FollowersDisplay from './FollowersDisplay';
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,10 +21,8 @@ const Navbar = () => {
         <div className="logo">FunPost</div>
         <>
           <div className="profile--details">
-            <div>
-              <Avatar />
-            </div>
-            <p>15K Followers 950 Following</p>
+            <Avatar firstName={user.firstName} lastName={user.lastName} />
+            <FollowersDisplay />
           </div>
           <div>
             <Link to="/">Feed</Link>
@@ -30,8 +30,7 @@ const Navbar = () => {
           <div>
             <Link to="/profile">Profile</Link>
           </div>
-          <button className="btn" onClick={handleLogout}>
-            <FaSignOutAlt />
+          <button className="logout--btn" onClick={handleLogout}>
             Logout
           </button>
         </>

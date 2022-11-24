@@ -1,9 +1,7 @@
-import React from 'react';
-
-const Avatar = () => {
+const Avatar = ({ firstName, lastName }) => {
   return (
     <div className="avatar--container">
-      <span>ZP</span>
+      <span>{firstName && lastName && `${firstName[0]} ${lastName[0]}`}</span>
     </div>
   );
 };

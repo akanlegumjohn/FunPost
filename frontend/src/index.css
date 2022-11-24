@@ -6,9 +6,10 @@
   --inactive_color: #b3ddff;
   --active_color: #41a9ff;
   --title_color: #1873e7;
-  --black--color: #000;
-  --links--color: #0c47cb;
+  --black_color: #000;
+  --links_color: #0c47cb;
   --avatar_color_1: #ffd37e;
+  --post_color: #232a30;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -31,7 +32,7 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--black--color);
+  color: var(--black_color);
 }
 
 p {
@@ -74,6 +75,9 @@ h3 {
   width: 70px;
   height: 70px;
   border-radius: 35px;
+}
+.avatar--container:hover {
+  cursor: pointer;
 }
 .avatar--container span {
   font-family: 'Roboto';
@@ -122,7 +126,7 @@ h3 {
   gap: 10px;
   align-items: center;
 }
-.profile--details div {
+.profile--details .avatar--container {
   width: 140px;
   height: 140px;
   border-radius: 70px;
@@ -134,7 +138,7 @@ h3 {
   font-size: 50px;
 }
 
-.profile--details p {
+.followers p {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -142,6 +146,14 @@ h3 {
   line-height: 23px;
   text-align: center;
   color: #3c464c;
+}
+.logout--btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  width: 80%;
 }
 /* End of navigation styles  */
 
@@ -262,7 +274,7 @@ p {
 }
 
 .post--btn {
-  background-color: var(--links--color);
+  background-color: var(--links_color);
   color: var(--black--color);
   border: none;
   cursor: pointer;
@@ -271,33 +283,36 @@ p {
   float: right;
   margin-right: 30px;
 }
-.ff {
-  background-color: red;
-}
 
 /* Post styles */
-.posts--content {
-  width: 70%;
-  margin: 0 auto;
-}
-.post--container {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px;
-  text-align: center;
-}
+
 .posts {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: auto;
 }
 
 .post {
-  background-color: #f4f4f4;
+  display: grid;
+  grid-template-columns: 100px auto;
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
+}
+.post .name {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--post_color);
+}
+.post .post--text {
+  font-family: 'Roboto';
+  font-style: normal;
+  text-align: left;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--black_color);
 }
 
 .post .close {

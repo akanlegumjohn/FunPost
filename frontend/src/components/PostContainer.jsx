@@ -2,7 +2,7 @@ import Post from './Post';
 
 const PostContainer = ({ posts }) => {
   return (
-    <section className="posts--content">
+    <section>
       {posts.map((post) => (
         <div className="posts" key={post._id}>
           <Post post={post} />
