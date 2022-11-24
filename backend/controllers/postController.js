@@ -8,12 +8,15 @@ const Post = require('../models/postModel');
 //@method   post
 const createPost = asyncHandler(async (req, res) => {
   const { text } = req.body;
+
   if (!text) {
     res.status(400).json({ msg: 'Please add text' });
   }
   const post = await Post.create({
     text,
     user: req.user.id,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
   });
   res.status(200).json(post);
 });

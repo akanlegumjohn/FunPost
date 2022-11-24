@@ -20,6 +20,16 @@ const userSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    followers: {
+      type: Number,
+      require: true,
+      default: 0,
+    },
+    following: {
+      type: Number,
+      require: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,

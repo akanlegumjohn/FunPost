@@ -37,6 +37,8 @@ const register = asyncHandler(async (req, res) => {
   res.status(200).json({
     firstName: user.firstName,
     lastName: user.lastName,
+    followers: user.followers,
+    following: user.following,
     email: user.email,
     token: generateToken(user._id),
   });
@@ -69,6 +71,8 @@ const login = asyncHandler(async (req, res) => {
       msg: 'You logged in successfully',
       firstName: user.firstName,
       lastName: user.lastName,
+      followers: user.followers,
+      following: user.following,
       id: user._id,
       email: user.email,
       token: generateToken(user._id),

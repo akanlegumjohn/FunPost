@@ -18,7 +18,6 @@ const protect = asyncHandler(async (req, res, next) => {
 
       //req.user represents the user that had just logged in and that can be used to access protected routes
       req.user = await User.findById(decode.id).select('-password');
-      console.log(req.user);
       next();
     } catch (error) {
       res.status(401).send('You are not authorized');
