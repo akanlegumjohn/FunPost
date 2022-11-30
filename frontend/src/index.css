@@ -305,6 +305,9 @@ p {
   font-size: 30px;
   color: var(--post_color);
 }
+.name span {
+  font-size: 70%;
+}
 .post .post--text {
   font-family: 'Roboto';
   font-style: normal;
