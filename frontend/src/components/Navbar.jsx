@@ -1,10 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-// import { FaSignOutAlt } from 'react-icons/fa';
 import { reset, logout } from '../features/auth/authSlice';
-import Avatar from './Avatar';
-import FollowersDisplay from './FollowersDisplay';
+import NavbarHandler from './NavbarHandler';
+
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,28 +14,7 @@ const Navbar = () => {
     dispatch(reset());
     navigate('/login');
   };
-  return (
-    user && (
-      <nav className="nav">
-        <div className="logo">FunPost</div>
-        <>
-          <div className="profile--details">
-            <Avatar firstName={user.firstName} lastName={user.lastName} />
-            <FollowersDisplay />
-          </div>
-          <div>
-            <Link to="/">Feed</Link>
-          </div>
-          <div>
-            <Link to="/profile">Profile</Link>
-          </div>
-          <button className="logout--btn" onClick={handleLogout}>
-            Logout
-          </button>
-        </>
-      </nav>
-    )
-  );
+  return user && <NavbarHandler handleLogout={handleLogout} />;
 };
 
 export default Navbar;

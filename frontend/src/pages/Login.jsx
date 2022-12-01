@@ -46,6 +46,7 @@ const Login = () => {
   if (isLoading) {
     return <Spinner />;
   }
+
   return (
     <>
       <section className="form--heading">
@@ -78,6 +79,12 @@ const Login = () => {
             <DisplayPassword
               setShowPassword={setShowPassword}
               showPassword={showPassword}
+              style={{
+                color: 'black',
+                postition: 'absolute',
+                right: '230px',
+                top: '265px',
+              }}
             />
           </div>
           <div className="form--group">

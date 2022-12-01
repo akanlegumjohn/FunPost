@@ -90,6 +90,18 @@ h3 {
 }
 
 /* Beginning of Navigation bar styles */
+
+.nav--close--btn {
+  position: absolute;
+  top: 25px;
+  left: 250px;
+  z-index: 1;
+  font-size: 35px;
+  cursor: pointer;
+  font-weight: 400;
+  color: var(--links_color);
+}
+
 .nav {
   box-sizing: border-box;
   position: fixed;
@@ -104,6 +116,27 @@ h3 {
   gap: 50px;
   padding: 20px 0;
   border-bottom: 1px solid var(--active_color);
+}
+/* compressed nav bar */
+.compressed--nav .nav {
+  width: 100px;
+}
+
+.compressed--nav .logo {
+  font-weight: 300;
+  font-size: 30px;
+}
+.compressed--nav .avatar--container {
+  margin-right: 20px;
+}
+.compressed--nav .bars {
+  font-size: 35px;
+  cursor: pointer;
+  font-weight: 400;
+  color: var(--links_color);
+}
+.compressed--nav a {
+  font-size: 50px;
 }
 
 .nav a {
@@ -304,6 +337,7 @@ p {
   font-weight: 500;
   font-size: 30px;
   color: var(--post_color);
+  cursor: pointer;
 }
 .name span {
   font-size: 70%;

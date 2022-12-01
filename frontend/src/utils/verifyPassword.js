@@ -1,14 +1,40 @@
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import validator from 'validator';
-export const DisplayPassword = ({ setShowPassword, showPassword }) => {
+export const DisplayPassword = ({ setShowPassword, showPassword, style }) => {
   return (
     <span
       onClick={() => setShowPassword((prevState) => !prevState)}
-      className="view-password"
+      // className="view-password"
     >
-      {showPassword ? 'show' : 'hide'}
+      {showPassword ? (
+        <span
+          style={{
+            color: 'black',
+            postition: 'absolute',
+            right: '230px',
+            top: '265px',
+            backgroundColor: 'red',
+          }}
+        >
+          <FaRegEye />
+        </span>
+      ) : (
+        <FaRegEyeSlash
+          style={{
+            color: 'black',
+            postition: 'absolute',
+            right: '230px',
+            top: '265px',
+          }}
+        />
+      )}
     </span>
   );
 };
+// const eyeStyle = {
+//   color: 'black',
+//   position: 'absolute',
+// };
 
 export const passwordStrengthChecker = (input) => {
   if (
