@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { FaRegHeart, CiEdit, AiOutlineDelete } from 'react-icons/fa';
 
-import { deletePost, postLike } from '../features/posts/postSlice';
-import { postTime } from '../utils/postTime';
-import Avatar from './Avatar';
+import './post.css';
+import { deletePost, postLike } from '../../features/posts/postSlice';
+import { postTime } from '../../utils/postTime';
+import Avatar from '../avatar/Avatar';
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();

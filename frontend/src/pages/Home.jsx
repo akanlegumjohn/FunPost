@@ -10,6 +10,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  const { isOpen } = useSelector((state) => state.toggle);
+
   const { posts, isLoading } = useSelector((state) => state.post);
 
   useEffect(() => {
@@ -23,8 +25,12 @@ const Home = () => {
   if (isLoading) {
     return <Spinner />;
   }
+
   return (
-    <>
+    <section
+      className="home--content"
+      style={isOpen ? { left: '325px' } : { left: '125px' }}
+    >
       {user && <PostForm />}
       <main className="main">
         {posts.length > 0 ? (
@@ -34,7 +40,7 @@ const Home = () => {
         )}
         <hr />
       </main>
-    </>
+    </section>
   );
 };
 

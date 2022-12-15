@@ -3,10 +3,12 @@ import Navbar from '../components/Navbar';
 
 const Main = () => {
   return (
-    <>
+    <div className="main--layout">
       <Navbar />
-      <Outlet />
-    </>
+      <div>
+        <Outlet />
+      </div>
+    </div>
   );
 };
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createPost } from '../features/posts/postSlice';
-import Avatar from './Avatar';
+import Avatar from './avatar/Avatar';
 
 const PostForm = () => {
   const [text, setText] = useState('');

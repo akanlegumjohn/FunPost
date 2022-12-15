@@ -1,14 +1,28 @@
 import { useState } from 'react';
-import CompressedNavbar from './CompressedNavbar';
+import { useDispatch } from 'react-redux';
+
+import { openNavbar, closeNavbar } from '../features/toggleNavbar/toggleSlice';
+import CompressedNavbar from './compressedNavbar/CompressedNavbar';
 import OpenNavbar from './OpenNavbar';
 
 const NavbarHandler = ({ handleLogout }) => {
+  const dispatch = useDispatch();
   const [isNavOpen, setNavBody] = useState(false);
-  const handleClick = () => setNavBody((prevState) => !prevState);
+  const handleOpen = () =>
+    setNavBody((prevState) => {
+      dispatch(closeNavbar());
+      return !prevState;
+    });
+
+  const handleClose = () =>
+    setNavBody((prevState) => {
+      dispatch(openNavbar());
+      return !prevState;
+    });
   return isNavOpen ? (
-    <OpenNavbar handleLogout={handleLogout} handleClick={handleClick} />
+    <OpenNavbar handleLogout={handleLogout} handleClick={handleOpen} />
   ) : (
-    <CompressedNavbar handleLogout={handleLogout} handleClick={handleClick} />
+    <CompressedNavbar handleLogout={handleLogout} handleClick={handleClose} />
   );
 };
 

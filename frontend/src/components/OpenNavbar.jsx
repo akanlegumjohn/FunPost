@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 
-import Avatar from './Avatar';
+import Avatar from './avatar/Avatar';
 import FollowersDisplay from './FollowersDisplay';
 
 const OpenNavbar = ({ handleLogout, handleClick }) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <div className="expanded-nav">
+    <div className="expanded--nav">
       <div className="nav--close--btn">
         <AiOutlineClose onClick={handleClick} />
       </div>

@@ -18,7 +18,6 @@
 
 /* General styles */
 * {
-  margin: 0;
   padding: 0;
   box-sizing: border-box;
   /* will have to add min-zoom and max-zoom to the app */
@@ -27,6 +26,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
+  width: 100vw;
   background: var(--background_color);
 }
 
@@ -66,29 +66,21 @@ h3 {
   color: var(--title_color);
 }
 
-/* Avatar styles */
-.avatar--container {
-  background: var(--avatar_color_1);
+.main--layout {
   display: flex;
-  justify-content: center;
-  margin-left: 20px;
-  width: 70px;
-  height: 70px;
-  border-radius: 35px;
+  gap: 10px;
 }
-.avatar--container:hover {
-  cursor: pointer;
+.home--content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  position: absolute;
+  /* left: 120px; */
+  /* left: 320px; */
 }
-.avatar--container span {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 47px;
-  margin-top: 10px;
-  color: var(--white_color);
+.main {
+  background: var(--white_color);
 }
-
 /* Beginning of Navigation bar styles */
 
 .nav--close--btn {
@@ -103,12 +95,8 @@ h3 {
 }
 
 .nav {
-  box-sizing: border-box;
   position: fixed;
-  width: 295px;
   height: 100%;
-  left: 0px;
-  top: 0px;
   background: var(--white_color);
   display: flex;
   flex-direction: column;
@@ -116,27 +104,6 @@ h3 {
   gap: 50px;
   padding: 20px 0;
   border-bottom: 1px solid var(--active_color);
-}
-/* compressed nav bar */
-.compressed--nav .nav {
-  width: 100px;
-}
-
-.compressed--nav .logo {
-  font-weight: 300;
-  font-size: 30px;
-}
-.compressed--nav .avatar--container {
-  margin-right: 20px;
-}
-.compressed--nav .bars {
-  font-size: 35px;
-  cursor: pointer;
-  font-weight: 400;
-  color: var(--links_color);
-}
-.compressed--nav a {
-  font-size: 50px;
 }
 
 .nav a {
@@ -152,6 +119,24 @@ h3 {
 .nav ul li a:hover {
   color: var(--inactive_color);
 }
+
+/* Beginning of css styles for expanded navbar */
+.expanded--nav .nav {
+  width: 300px;
+}
+.expanded--nav .avatar--container span {
+  font-size: 60px;
+  margin-top: 45px;
+}
+.logout--btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  width: 80%;
+}
+/*  End of the css styles for expanded navbar*/
 
 .profile--details {
   display: flex;
@@ -180,25 +165,8 @@ h3 {
   text-align: center;
   color: #3c464c;
 }
-.logout--btn {
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  width: 80%;
-}
-/* End of navigation styles  */
 
-/* Main content styles */
-.main {
-  position: absolute;
-  left: 303px;
-  width: 70%;
-  height: auto;
-  top: 277px;
-  background: var(--white_color);
-}
+/* End of navigation styles  */
 
 /* Register and log in form styles*/
 .form--heading {
@@ -279,14 +247,8 @@ p {
 
 /* Post form style */
 .post--form--container {
-  position: absolute;
-  width: 70%;
-  padding: 20px;
-  height: 251px;
-  left: 303px;
-  top: 10px;
   background: var(--white_color);
-  margin: 0 auto;
+  padding: 20px;
 }
 .post--form {
   display: flex;
@@ -317,51 +279,10 @@ p {
   margin-right: 30px;
 }
 
-/* Post styles */
-
 .posts {
   display: grid;
   grid-template-columns: auto;
 }
-
-.post {
-  display: grid;
-  grid-template-columns: 100px auto;
-  margin: 10px 0;
-  padding: 20px 0 10px;
-  position: relative;
-}
-.post .name {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
-  color: var(--post_color);
-  cursor: pointer;
-}
-.name span {
-  font-size: 70%;
-}
-.post .post--text {
-  font-family: 'Roboto';
-  font-style: normal;
-  text-align: left;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
-  color: var(--black_color);
-}
-
-.post .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-/* End of post styles */
 
 /* Password validity styles */
 .stable-password {

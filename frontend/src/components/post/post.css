@@ -1,0 +1,36 @@
+.post {
+  display: grid;
+  grid-template-columns: 100px auto;
+  margin: 10px 0;
+  padding: 20px 0 10px;
+  position: relative;
+}
+.post .name {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--post_color);
+  cursor: pointer;
+}
+.name span {
+  font-size: 70%;
+}
+.post .post--text {
+  font-family: 'Roboto';
+  font-style: normal;
+  text-align: left;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--black_color);
+}
+
+.post .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}

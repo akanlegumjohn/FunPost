@@ -1,0 +1,21 @@
+/* The variable colors used in here are those defined in the index.css */
+.avatar--container {
+  background: var(--avatar_color_1);
+  display: flex;
+  justify-content: center;
+  margin-left: 20px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  cursor: pointer;
+}
+
+.avatar--container span {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 47px;
+  margin-top: 10px;
+  color: var(--white_color);
+}

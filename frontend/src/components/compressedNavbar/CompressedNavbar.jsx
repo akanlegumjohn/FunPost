@@ -3,7 +3,8 @@ import { AiOutlineUser, AiOutlineHome } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Avatar from './Avatar';
+import Avatar from '../avatar/Avatar';
+import './compressedNavbar.css';
 const CompressedNavbar = ({ handleLogout, handleClick }) => {
   const { user } = useSelector((state) => state.auth);
   return (
@@ -25,8 +26,9 @@ const CompressedNavbar = ({ handleLogout, handleClick }) => {
               <AiOutlineUser />
             </Link>
           </div>
-
-          <FaSignOutAlt onClick={handleLogout} />
+          <Link>
+            <FaSignOutAlt onClick={handleLogout} />
+          </Link>
         </>
       </nav>
     </div>

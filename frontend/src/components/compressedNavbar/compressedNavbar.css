@@ -1,0 +1,20 @@
+.compressed--nav .nav {
+  width: 100px;
+}
+
+.compressed--nav .logo {
+  font-weight: 300;
+  font-size: 30px;
+}
+.compressed--nav .avatar--container {
+  margin-right: 20px;
+}
+.compressed--nav .bars {
+  font-size: 35px;
+  cursor: pointer;
+  font-weight: 400;
+  color: var(--links_color);
+}
+.compressed--nav a {
+  font-size: 40px;
+}

@@ -1,3 +1,4 @@
+import './avatar.css'
 const Avatar = ({ firstName, lastName }) => {
   return (
     <div className="avatar--container">
